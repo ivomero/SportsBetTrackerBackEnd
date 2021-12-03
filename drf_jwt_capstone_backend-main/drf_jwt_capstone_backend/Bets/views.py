@@ -11,7 +11,7 @@ class BetsList(APIView):
 
     def get(self, request):
         bets = Bets.objects.all()
-        serializer = Bets(bets, many=True)
+        serializer = BetsSerializer(bets, many=True)
         return Response(serializer.data)
 
     def post(self, request):
