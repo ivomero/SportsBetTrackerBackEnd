@@ -7,6 +7,6 @@ User = get_user_model()
 
 class Bets(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    unit_bet = models.IntegerField()
+    unit_bet = models.IntegerField(default=0)
     game_id = models.ForeignKey(
         'Games.Games', on_delete=models.CASCADE)
