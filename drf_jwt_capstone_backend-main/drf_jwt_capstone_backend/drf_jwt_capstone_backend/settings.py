@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
-    'Bets',
-    'Games',
-    'Comments',
+    'Bets.apps.BetsConfig',
+    'Games.apps.GamesConfig',
+    'Comments.apps.CommentsConfig',
 ]
 
 MIDDLEWARE = [

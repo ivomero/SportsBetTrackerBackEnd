@@ -1,7 +1,9 @@
 from rest_framework import serializers
-from .models import Games
+from .models import Game
 
-class GamesSerializer(serializers.ModelSerializer):
+
+class GameSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Games
-        fields = ['id', 'user_id', 'comment_id', 'away_team', 'home_team', 'start_time', 'winner']
+        model = Game
+        fields = ['id', 'api_game_id', 'user_id',
+                  'away_team', 'home_team', 'start_time', 'winner']

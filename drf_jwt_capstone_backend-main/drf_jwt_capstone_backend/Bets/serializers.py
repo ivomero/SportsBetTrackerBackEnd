@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Bets
+from .models import Bet
 
 
-class BetsSerializer(serializers.ModelSerializer):
+class BetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Bets
+        model = Bet
         fields = ['id', 'user_id', 'unit_bet', 'game_id']

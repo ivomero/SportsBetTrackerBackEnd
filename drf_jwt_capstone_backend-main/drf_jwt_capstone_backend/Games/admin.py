@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Games
+from .models import Game
 # from .models import Games
 # from .models import Comments
 # from .models import Bets
@@ -9,4 +9,4 @@ from .models import Games
 # admin.site.register(Bets)
 # admin.site.register(Comments)
 
-admin.site.register(Games)
+admin.site.register(Game)

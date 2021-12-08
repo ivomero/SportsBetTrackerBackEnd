@@ -1,5 +1,5 @@
-from .models import Bets
-from .serializers import BetsSerializer
+from .models import Bet
+from .serializers import BetSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
@@ -8,15 +8,15 @@ from rest_framework import status
 # Create your views here.
 
 
-class BetsList(APIView):
+class BetList(APIView):
 
     def get(self, request):
-        bets = Bets.objects.all()
-        serializer = BetsSerializer(bets, many=True)
+        bets = Bet.objects.all()
+        serializer = BetSerializer(bets, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = BetsSerializer(data=request.data)
+        serializer = BetSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -27,20 +27,20 @@ class BetsDetail(APIView):
 
     def get_object(self, pk):
         try:
-            return Bets.objects.get(pk=pk)
-        except Bets.DoesNotExist:
+            return Bet.objects.get(pk=pk)
+        except Bet.DoesNotExist:
             raise Http404
 
     # get by id
     def get(self, request, pk):
         bets = self.get_object(pk)
-        serializer = BetsSerializer(bets)
+        serializer = BetSerializer(bets)
         return Response(serializer.data)
 
     # update
     def put(self, request, pk):
         bets = self.get_object(pk)
-        serializer = BetsSerializer(bets, data=request.data)
+        serializer = BetSerializer(bets, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

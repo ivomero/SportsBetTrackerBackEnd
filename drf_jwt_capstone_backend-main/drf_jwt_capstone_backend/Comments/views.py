@@ -1,5 +1,5 @@
-from .models import Comments
-from .serializers import CommentsSerializer
+from .models import Comment
+from .serializers import CommentSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
@@ -8,39 +8,39 @@ from rest_framework import status
 # Create your views here.
 
 
-class CommentsList(APIView):
+class CommentList(APIView):
 
     def get(self, request):
-        comments = Comments.objects.all()
-        serializer = CommentsSerializer(comments, many=True)
+        comments = Comment.objects.all()
+        serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = CommentsSerializer(data=request.data)
+        serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CommentsDetail(APIView):
+class CommentDetail(APIView):
 
     def get_object(self, pk):
         try:
-            return Comments.objects.get(pk=pk)
-        except Comments.DoesNotExist:
+            return Comment.objects.get(pk=pk)
+        except Comment.DoesNotExist:
             raise Http404
 
     # get by id
     def get(self, request, pk):
         comments = self.get_object(pk)
-        serializer = CommentsSerializer(comments)
+        serializer = CommentSerializer(comments)
         return Response(serializer.data)
 
     # update
     def put(self, request, pk):
         comments = self.get_object(pk)
-        serializer = CommentsSerializer(comments, data=request.data)
+        serializer = CommentSerializer(comments, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
