@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
 from rest_framework import status
+from Games.models import Game
 
 # Create your views here.
 
@@ -16,7 +17,14 @@ class CommentList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = CommentSerializer(data=request.data)
+
+        game = Game.objects.filter(api_game_id=request.data['game_id']).first()
+        comment = {
+            'user_id': request.data['user_id'],
+            'game_id': game.id,
+            'comment': request.data['comment']
+        }
+        serializer = CommentSerializer(data=comment)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

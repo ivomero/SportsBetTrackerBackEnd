@@ -9,5 +9,5 @@ User = get_user_model()
 class Bet(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     unit_bet = models.IntegerField(default=0)
-    game_id = models.ForeignKey(
-        Game, on_delete=models.CASCADE)
+    team = models.CharField(max_length=50)
+    game_id = models.CharField(max_length=200)

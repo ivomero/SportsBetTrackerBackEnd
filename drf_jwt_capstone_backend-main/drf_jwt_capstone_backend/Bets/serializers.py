@@ -5,4 +5,4 @@ from .models import Bet
 class BetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bet
-        fields = ['id', 'user_id', 'unit_bet', 'game_id']
+        fields = ['id', 'user_id', 'unit_bet', 'team', 'game_id']
